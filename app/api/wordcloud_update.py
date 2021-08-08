@@ -37,10 +37,6 @@ async def wordcloudtext(story, metric: str = Query('len_count', enum=['len_count
     # scale the complexities so the sum is 1000
     words['complexity'] = words['complexity'] / words['complexity'].sum()
     word_complexities = dict(zip(words.word, words.complexity))
-    word_complexities = json.dumps(word_complexities)
 
     return word_complexities
 
-'''Still Missing:
--Code to only return the more complex words
--A dropdown menu to select the complexity algorithm'''
