@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from app.api import wordcloud_text, wordcloud_cloud, wordcloud_update
+from app.api import wordcloud_text, wordcloud_cloud, wordcloud_update, database
 
 application = app = FastAPI(
     title="Labs26-StorySquad-DS-Team B",
@@ -10,6 +10,7 @@ application = app = FastAPI(
     docs_url="/"
 )
 
+app.include_router(database.router, tags=['Database'])
 app.include_router(wordcloud_text.router, tags=['Word Cloud'])
 app.include_router(wordcloud_update.router, tags=['Word Cloud'])
 app.include_router(wordcloud_cloud.router, tags=['Word Cloud'])
@@ -21,9 +22,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# @app.get("/")
-# async def root():
-#     return {"message": "Hezzo Blurd"}
 
 if __name__ == "__main__":
     uvicorn.run(application)
