@@ -2,6 +2,10 @@ from sqlalchemy import create_engine, Integer, Column, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from fastapi import APIRouter, Depends, HTTPException
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 router = APIRouter()
@@ -11,10 +15,16 @@ temporarily using SQLite database for local development
 SQLALCHEMY_DATABASE_URL = dialect://user:password@host.dbname
 '''
 
-SQLALCHEMY_DATABASE_URL = r'sqlite:///C:\Users\temsy\Documents\GitHub\ebtest\test_data.db'
+#connect to ElephantSQL-hosted PostgreSQL
+DB_NAME = os.getenv("DB_NAME", default="OOPS")
+DB_USER = os.getenv("DB_USER", default="OOPS")
+DB_PASSWORD = os.getenv("DB_PASSWORD", default="OOPS")
+DB_HOST = os.getenv("DB_HOST", default="OOPS")
+
+DATABASE_URL = 'postgresql://{}:{}@{}/{}'.format(DB_USER,DB_PASSWORD,DB_HOST,DB_NAME)
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    DATABASE_URL
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
