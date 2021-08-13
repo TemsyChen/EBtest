@@ -16,12 +16,13 @@ SQLALCHEMY_DATABASE_URL = dialect://user:password@host.dbname
 '''
 
 #connect to ElephantSQL-hosted PostgreSQL
-DB_NAME = os.getenv("DB_NAME", default="OOPS")
-DB_USER = os.getenv("DB_USER", default="OOPS")
-DB_PASSWORD = os.getenv("DB_PASSWORD", default="OOPS")
-DB_HOST = os.getenv("DB_HOST", default="OOPS")
+DB_NAME = os.getenv("RDS_DB_NAME", default="OOPS")
+DB_USER = os.getenv("RDS_USERNAME", default="OOPS")
+DB_PASSWORD = os.getenv("RDS_PASSWORD", default="OOPS")
+DB_HOST = os.getenv("RDS_HOSTNAME", default="OOPS")
+DB_PORT = os.getenv("RDS_PORT", default="OOPS")
 
-DATABASE_URL = 'postgresql://{}:{}@{}/{}'.format(DB_USER,DB_PASSWORD,DB_HOST,DB_NAME)
+DATABASE_URL = 'postgresql://{}:{}@{}:{}/{}'.format(DB_USER,DB_PASSWORD,DB_HOST,DB_PORT,DB_NAME)
 
 engine = create_engine(
     DATABASE_URL
