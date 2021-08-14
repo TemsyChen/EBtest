@@ -52,6 +52,6 @@ threadpoolctl==2.2.0
 tifffile==2021.8.8
 typing-extensions==3.10.0.0
 urllib3==1.25.11
-uvicorn==0.14.0
+uvicorn
 Werkzeug==2.0.1
 wordcloud==1.8.1
