@@ -7,13 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 router = APIRouter()
 
-'''
-temporarily using SQLite database for local development
-SQLALCHEMY_DATABASE_URL = dialect://user:password@host.dbname
-'''
 
 #connect to ElephantSQL-hosted PostgreSQL
 DB_NAME = os.getenv("RDS_DB_NAME", default="OOPS")
@@ -34,7 +29,7 @@ Base = declarative_base()
 Base.metadata.create_all(bind=engine)
 
 class Stories(Base):
-    __tablename__ = 'stories'
+    __tablename__ = "stories"
 
     id = Column(Integer, primary_key=True, index=True)
     story = Column(String, index=True)
